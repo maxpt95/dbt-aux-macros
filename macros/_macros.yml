@@ -1,0 +1,75 @@
+version: 2
+macros:
+  - name: add_fields
+    description: 'Add fields to a table'
+    docs:
+      show: true
+    arguments:
+      - name: schema
+        type: str
+        description: 'schema name'
+      - name: table
+        type: str
+        description: 'table name' 
+      - name: middle_fields
+        type: dict[list[dict[str]]] 
+        description: 'A dictionary with Following existing fields of the new field as key, with the new field name and datatype as values.
+          E.g:{ 
+            "date_of_birth": 
+              [
+                {
+                  "name": "name",
+                  "type": "string"
+                },
+                {
+                  "name": "surname",
+                  "type": "string"
+                },
+              ] 
+            "gpa":
+              [{
+                "name": "school",
+                "type": "string"
+              }]
+            }
+          Resulting Schema: id, name, surname, date_of_birth, school, gpa'
+      - name: last_fields
+        type: dict[str]
+        description: 'Field to be appendeded to the tail of the schema and its datatype'
+      - name: database
+        type: str
+        description: 'Database name, defaults to target.database'
+  - name: remove_fields
+    description: 'Remove fields from a table'
+    docs:
+      show: true
+    arguments:
+      - name: schema
+        type: str
+        description: 'schema name'
+      - name: table
+        type: str
+        description: 'table name' 
+      - name: fields
+        type: list[str] 
+        description: 'A distinct list of the field names to be removed' 
+      - name: database
+        type: str
+        description: 'Database name, defaults to target.database'
+  - name: rename_fields
+    description: 'Rename fields from a table'
+    docs:
+      show: true
+    arguments:
+      - name: schema
+        type: str
+        description: 'schema name'
+      - name: table
+        type: str
+        description: 'table name' 
+      - name: fields
+        type: dict[str] 
+        description: 'Original field name with new name, e.g: {"old_name": "new_name", "old_surname": "new_surname"} ' 
+      - name: database
+        type: str
+        description: 'Database name, defaults to target.database'
